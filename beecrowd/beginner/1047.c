@@ -22,26 +22,29 @@
 
 int main(void) {
     const char *GAME_DURATION = "O JOGO DUROU %d HORA(S) E %d MINUTO(S)\n";
-    int gameTime[4] = {0};
+    int gameTime[4] = {0}; // 0: initial hour, 1: initial minute, 2: final hour, 3: final minute
     int gameHours = 0;
     int gameMinutes = 0;
     for (int i = 0; i < 4; i++) {
         scanf("%d", &gameTime[i]);
     }
+    // calculate game hours
     if (gameTime[0] == gameTime[2]) {
         if (gameTime[1] >= gameTime[3]) {
             gameHours = 24;
         }
     } else if (gameTime[0] > gameTime[2]) {
         gameHours = gameTime[2] - gameTime[0] + 24;
-    } else {
+    } else
         gameHours = gameTime[2] - gameTime[0];
-    }
+
+    // calculate game minutes
     if (gameTime[1] > gameTime[3]) {
         gameHours--;
         gameMinutes = (gameTime[3] - gameTime[1]) + 60;
     } else
         gameMinutes = (gameTime[3] - gameTime[1]);
+
     printf(GAME_DURATION, gameHours, gameMinutes);
     return 0;
 }
